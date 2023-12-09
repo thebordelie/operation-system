@@ -2,6 +2,7 @@
 
 static int __init vmstat_init(void)
 {
+    mutex_init(&lock);
     pr_info("vmstat module init\n");
 
     vmstat_dir = debugfs_create_dir(DIR_NAME, NULL);
@@ -41,12 +42,14 @@ static ssize_t write_function(struct file *file, const char __user *buffer, size
 }
 
 static int open_function(struct inode *inodep, struct file *filep) {
+    mutex_lock(&lock);
     pr_info("File has been opened");
     return 0;
 }
 
 static int release_function(struct inode *inodep, struct file *filep) {
     pr_info("File has been closed");
+    mutex_unlock(&lock);
     return 0;
 }
 
