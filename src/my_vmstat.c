@@ -11,7 +11,7 @@ static int __init vmstat_init(void)
         return -ENOMEM;
     }
 
-    vmstat_file = debugfs_create_file(FILE_NAME, 0777, vmstat_dir, NULL, &fops);
+    vmstat_file = debugfs_create_file(FILE_NAME, 0666, vmstat_dir, NULL, &fops);
     if (!vmstat_file) {
         pr_err("Failed to create vmstat debug file\n");
         debugfs_remove_recursive(vmstat_dir);
