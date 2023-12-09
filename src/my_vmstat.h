@@ -13,6 +13,7 @@
 #include <linux/kernel_stat.h>
 
 static struct dentry *vmstat_dir;
+static struct mutex lock;
 static struct dentry *vmstat_file;
 static struct task_struct* task;
 static output_settings settings = 0;
